@@ -8,17 +8,17 @@
                     <form class="nav-search">
                         <fieldset>
                             <span class="algolia-autocomplete"
-                                        style="position: relative; display: inline-block; direction: ltr;">
+                                  style="position: relative; display: inline-block; direction: ltr;">
                                 <input
-                                class="algolia-autocomplete algolia-autocomplete-site-header algolia-autocomplete-site-header-desktop aa-hint"
-                                autocomplete="off" value="" readonly="" aria-hidden="true" spellcheck="false"
-                                tabindex="-1"
-                                style="position: absolute; top: 0px; left: 0px; border-color: transparent; box-shadow: none; opacity: 1; background: none 0% 0% / auto repeat scroll padding-box border-box rgb(2, 87, 130);"><input
-                                class="algolia-autocomplete algolia-autocomplete-site-header algolia-autocomplete-site-header-desktop aa-input"
-                                placeholder="Search show or venue" name="q" autocomplete="off" value=""
-                                spellcheck="false" role="combobox" aria-autocomplete="both" aria-expanded="false"
-                                aria-owns="algolia-autocomplete-listbox-0" dir="auto"
-                                style="position: relative; vertical-align: top; background-color: transparent;">
+                                        class="algolia-autocomplete algolia-autocomplete-site-header algolia-autocomplete-site-header-desktop aa-hint"
+                                        autocomplete="off" value="" readonly="" aria-hidden="true" spellcheck="false"
+                                        tabindex="-1"
+                                        style="position: absolute; top: 0px; left: 0px; border-color: transparent; box-shadow: none; opacity: 1; background: none 0% 0% / auto repeat scroll padding-box border-box rgb(2, 87, 130);"><input
+                                    class="algolia-autocomplete algolia-autocomplete-site-header algolia-autocomplete-site-header-desktop aa-input"
+                                    placeholder="Search show or venue" name="q" autocomplete="off" value=""
+                                    spellcheck="false" role="combobox" aria-autocomplete="both" aria-expanded="false"
+                                    aria-owns="algolia-autocomplete-listbox-0" dir="auto"
+                                    style="position: relative; vertical-align: top; background-color: transparent;">
                                 </span>
                         </fieldset>
                     </form>
@@ -122,7 +122,21 @@
                          alt="Cropped Image"/>
                 </div>
             </div>
-            <button class="btn btn-success" type="button" @click="save">Submit</button>
+
+            <section style="border-top: 1px solid #e7e7e7">
+                <b-form-checkbox
+                        id="checkbox-1"
+                        v-model="status"
+                        name="checkbox-1"
+                        value="accepted"
+                        unchecked-value="not_accepted"
+                        style="font-weight: normal"
+                >
+                    I understand that SeatPlan approves each review and will remove fake or duplicate reviews.
+                </b-form-checkbox>
+                <button class="btn btn-success" type="button" @click="save">Submit</button>
+            </section>
+
         </div>
         <detail-modal v-if="active" :active="active" :model="dataSummary"></detail-modal>
     </div>
@@ -135,6 +149,7 @@
     import datePicker from 'vue-bootstrap-datetimepicker';
     import 'pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css';
     import DetailModal from "./DetailsModal.vue"
+    import {BFormCheckbox} from "bootstrap-vue"
 
     export default {
         name: "add-photo",
@@ -142,10 +157,12 @@
             StarRating,
             VueCropper,
             datePicker,
-            DetailModal
+            DetailModal,
+            BFormCheckbox
         },
         data() {
             return {
+                status: '',
                 active: false,
                 imgSrc: '',
                 cropImg: '',
